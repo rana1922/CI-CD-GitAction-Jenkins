@@ -1,0 +1,14 @@
+{
+  "name": "meditation-registration",
+  "version": "1.0.0",
+  "description": "Meditation Camp Registration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  }
+}

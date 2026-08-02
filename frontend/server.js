@@ -14,7 +14,7 @@ app.use(express.json());
 
 // EJS
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "templates"));
 
 // Home Page
 app.get("/", (req, res) => {

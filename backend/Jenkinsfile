@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/rana1922/CI-CD-GitAction-Jenkins.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('backend') {
+                    sh '''
+                    if [ ! -d "venv" ]; then
+                        /usr/bin/python3 -m venv venv
+                    fi
+
+                    . venv/bin/activate
+                    pip install -r requirements.txt
+                    '''
+                }
+            }
+        }
+
+        stage('Restart Backend') {
+           steps {
+        dir('backend') {
+            sh '''
+            if pm2 describe meditation-backend > /dev/null 2>&1; then
+                pm2 restart meditation-backend
+            else
+                pm2 start "venv/bin/python app.py" --name meditation-backend
+            fi
+
+            pm2 save
+            '''
+        }
+            }
+        }
+    }
+}

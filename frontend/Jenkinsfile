@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/rana1922/CI-CD-GitAction-Jenkins.git'
+            }
+        }
+
+        stage('Install Node Dependencies') {
+            steps {
+                dir('frontend') {
+                    sh '''
+                    npm install
+                    '''
+                }
+            }
+        }
+
+        stage('Restart Frontend') {
+            steps {
+                dir('frontend') {
+                    sh '''
+                    pm2 restart meditation-frontend || pm2 start server.js --name meditation-frontend
+                    pm2 save
+                    '''
+                }
+            }
+        }
+
+    }
+}

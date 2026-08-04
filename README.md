@@ -324,7 +324,7 @@ sudo journalctl -u jenkins -f
 
 # Author
 
-**Navneet Rana**
+**Navneet Singh Rana**
 
 DevOps Engineer
 
